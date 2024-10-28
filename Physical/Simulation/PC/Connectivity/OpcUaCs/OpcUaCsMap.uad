@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?AutomationStudio FileVersion="6.0"?>
+<OpcUaSource FileVersion="10">
+  <Aliases>
+    <ACLAliases />
+    <EURangeViolationAliases />
+    <EURangesAliases />
+    <EngineeringUnitAliases />
+  </Aliases>
+  <Module Name="&lt;Default&gt;">
+    <Task Name="ServerTask">
+      <Variable Name="Step" />
+      <Variable Name="TestStructA" RecursiveEnable="2" />
+      <Variable Name="VarA" />
+      <Variable Name="VarB" />
+      <Variable Name="VarResult" />
+      <Variable Name="VarX" />
+      <Variable Name="VarY" />
+      <Variable Name="VarZ" />
+      <Method Name="Multiply" />
+    </Task>
+  </Module>
+</OpcUaSource>

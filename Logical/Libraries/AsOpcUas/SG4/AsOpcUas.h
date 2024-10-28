@@ -16,21 +16,6 @@ extern "C"
 #ifndef _BUR_PUBLIC
 #define _BUR_PUBLIC
 #endif
-/* Constants */
-#ifdef _REPLACE_CONST
- #define MAX_LENGTH_NAMESPACEURI 255U
- #define MAX_LENGTH_EVENTFIELDPATH 255U
-#else
- #ifndef _GLOBAL_CONST
-   #define _GLOBAL_CONST _WEAK const
- #endif
- _GLOBAL_CONST unsigned short MAX_LENGTH_NAMESPACEURI;
- _GLOBAL_CONST unsigned short MAX_LENGTH_EVENTFIELDPATH;
-#endif
-
-
-
-
 /* Datatypes and datatypes of function blocks */
 typedef enum UaMethodOperateAction
 {	UaMoa_CheckIsCalled = 0,
@@ -90,6 +75,7 @@ typedef struct UaSrv_MethodOperate
 	/* VAR_INPUT (analog) */
 	plcstring MethodName[256];
 	enum UaMethodOperateAction Action;
+	plcdword MethodResult;
 	/* VAR_OUTPUT (analog) */
 	plcdword ErrorID;
 	/* VAR (analog) */
@@ -107,8 +93,8 @@ typedef struct UaSrv_MethodCreate
 {
 	/* VAR_INPUT (analog) */
 	plcstring MethodName[256];
-	struct UAMethodArgument InputArguments[10];
-	struct UAMethodArgument OutputArguments[10];
+	struct BrUaMethodArgument InputArguments[10];
+	struct BrUaMethodArgument OutputArguments[10];
 	/* VAR_OUTPUT (analog) */
 	plcdword ErrorID;
 	/* VAR (analog) */
@@ -182,6 +168,22 @@ _BUR_PUBLIC void UaSrv_MethodDelete(struct UaSrv_MethodDelete* inst);
 _BUR_PUBLIC void UaSrv_GetNamespaceIndex(struct UaSrv_GetNamespaceIndex* inst);
 _BUR_PUBLIC void UaSrv_FireEvent(struct UaSrv_FireEvent* inst);
 _BUR_PUBLIC UAServerState UaSrv_GetServerState(void);
+
+
+/* Constants */
+#ifdef _REPLACE_CONST
+ #define UA_Bad_DuplicateArgument 2952790034U
+ #define UA_Bad_MethodNameInvalid 2952790033U
+ #define MAX_LENGTH_NAMESPACEURI 255U
+ #define MAX_LENGTH_EVENTFIELDPATH 255U
+#else
+ _GLOBAL_CONST unsigned long UA_Bad_DuplicateArgument;
+ _GLOBAL_CONST unsigned long UA_Bad_MethodNameInvalid;
+ _GLOBAL_CONST unsigned short MAX_LENGTH_NAMESPACEURI;
+ _GLOBAL_CONST unsigned short MAX_LENGTH_EVENTFIELDPATH;
+#endif
+
+
 
 
 #ifdef __cplusplus

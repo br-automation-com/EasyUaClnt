@@ -6,4 +6,5 @@ VAR
 	NodeIDs_0 : ARRAY[0..2] OF UANodeID;
 	Variables_0 : ARRAY[0..2] OF STRING[255];
 	NodeErrorIDs_0 : ARRAY[0..2] OF DWORD;
+	SessionConnectInfo : UASessionConnectInfo;
 END_VAR

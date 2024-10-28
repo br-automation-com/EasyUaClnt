@@ -12,7 +12,7 @@
   <Settings>
     <UseThemes>true</UseThemes>
     <UseLocalThemes>false</UseLocalThemes>
-    <Theme>Standard_Library_Extended_V1.3.0.0</Theme>
+    <Theme>Standard_Extended_Library_EasyUaClnt</Theme>
     <UseLocalCssFile>false</UseLocalCssFile>
     <UseLocalHelpConfigFile>false</UseLocalHelpConfigFile>
     <HelpConfig>Standard_Library_V1_3_0_0.xml</HelpConfig>

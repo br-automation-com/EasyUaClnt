@@ -2,17 +2,17 @@
 {REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_Connect
 	VAR_INPUT
 		Execute	           		: BOOL;
-		ServerEndpointUrl		: STRING[255];
+		ServerEndpointUrl		: STRING[MAX_LENGTH_STRING];
 		SessionConnectInfo 		: UASessionConnectInfo;
 		Timeout            		: TIME;
 	END_VAR
 
 	VAR_OUTPUT
-		ConnectionHdl      		: DWORD;
 		Done			   		: BOOL;
 		Busy               		: BOOL;
 		Error              		: BOOL;
 		ErrorID            		: DWORD;
+		ConnectionHdl      		: DWORD;
 	END_VAR
 
 	VAR
@@ -39,11 +39,11 @@ END_FUNCTION_BLOCK
 	END_VAR
 END_FUNCTION_BLOCK
 
-{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_GetNamespaceIndex
+{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_NamespaceGetIndex
 	VAR_INPUT
 		Execute	           		: BOOL;
 		ConnectionHdl      		: DWORD;
-		NamespaceUri			: STRING[255];
+		NamespaceUri			: STRING[MAX_LENGTH_STRING];
 		Timeout            		: TIME;
 	END_VAR
 
@@ -60,12 +60,105 @@ END_FUNCTION_BLOCK
 	END_VAR
 END_FUNCTION_BLOCK
 
+{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_NamespaceGetIndexList
+	VAR_INPUT
+		Execute					: BOOL;
+		ConnectionHdl			: DWORD;
+		NamespaceUrisCount		: UINT;
+		NamespaceUris			: ARRAY[0..MAX_INDEX_NAMESPACES] OF STRING[MAX_LENGTH_STRING];
+		Timeout					: TIME;
+	END_VAR
+	
+	VAR_OUTPUT
+		Done			   		: BOOL;
+		Busy               		: BOOL;
+		Error              		: BOOL;
+		ErrorID           		: DWORD;
+		ErrorIDs           		: ARRAY[0..MAX_INDEX_NAMESPACES] OF DWORD;
+		NamespaceIndexes		: ARRAY[0..MAX_INDEX_NAMESPACES] OF UINT;
+	END_VAR
+	
+	VAR
+		i_busy             		: BOOL;
+	END_VAR
+END_FUNCTION_BLOCK
+
+{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_ServerGetUriByIndex
+	VAR_INPUT
+		Execute					: BOOL;
+		ConnectionHdl			: DWORD;
+		ServerIndex				: UDINT;
+		Timeout					: TIME;
+	END_VAR
+	
+	VAR_OUTPUT
+		Done			   		: BOOL;
+		Busy               		: BOOL;
+		Error              		: BOOL;
+		ErrorID            		: DWORD;
+		ServerUri				: STRING[MAX_LENGTH_STRING];
+	END_VAR
+	
+	VAR
+		i_busy             		: BOOL;
+	END_VAR
+END_FUNCTION_BLOCK
+
+{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_ServerGetIndexByUriList
+	VAR_INPUT
+		Execute					: BOOL;
+		ConnectionHdl			: DWORD;
+		ServerUrisCount			: UINT;
+		ServerUris				: ARRAY[0..MAX_INDEX_NAMESPACES] OF STRING[MAX_LENGTH_STRING];
+		Timeout					: TIME;
+	END_VAR
+	
+	VAR_OUTPUT
+		Done			   		: BOOL;
+		Busy               		: BOOL;
+		Error              		: BOOL;
+		ErrorID           		: DWORD;
+		ErrorIDs            	: ARRAY[0..MAX_INDEX_NAMESPACES] OF DWORD;
+		ServerIndexes			: ARRAY[0..MAX_INDEX_NAMESPACES] OF UDINT;
+	END_VAR
+	
+	VAR
+		i_busy             		: BOOL;
+	END_VAR
+END_FUNCTION_BLOCK
+
+{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_Browse
+	VAR_INPUT
+		Execute					: BOOL;
+		ConnectionHdl			: DWORD;
+		ViewDescription			: UAViewDescription;
+		BrowseDescription		: UABrowseDescription;
+		ContinuationPointIn		: DWORD;
+		Timeout					: TIME;
+	END_VAR
+	
+	VAR_OUTPUT
+		Done			   		: BOOL;
+		Busy               		: BOOL;
+		Error              		: BOOL;
+		ErrorID            		: DWORD;
+		BrowseResultCount		: UINT;
+		BrowseResult			: ARRAY[0..MAX_INDEX_BROWSERESULT] OF UAReferenceDescription;
+		ContinuationPointOut	: DWORD;
+	END_VAR
+	
+	VAR
+		i_continuation			: DWORD;
+		i_busy             		: BOOL;
+	END_VAR
+END_FUNCTION_BLOCK
+
 {REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_TranslatePath
 	VAR_INPUT
 		Execute	           		: BOOL;
 		ConnectionHdl      		: DWORD;
 		StartNodeID				: UANodeID;
-		RelativePath			: STRING[255];	
+		RelativePath			: STRING[MAX_LENGTH_STRING];	
 		Timeout            		: TIME;
 	END_VAR
 
@@ -77,6 +170,29 @@ END_FUNCTION_BLOCK
 		ErrorID            		: DWORD;
 	END_VAR
 
+	VAR
+		i_busy             		: BOOL;
+	END_VAR
+END_FUNCTION_BLOCK
+
+{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_TranslatePathList
+	VAR_INPUT
+		Execute					: BOOL;
+		ConnectionHdl			: DWORD;
+		BrowsePathsCount		: UINT;
+		BrowsePaths				: ARRAY[0..MAX_INDEX_NODELIST] OF UABrowsePath;
+		Timeout					: TIME;
+	END_VAR
+	
+	VAR_OUTPUT
+		Done			   		: BOOL;
+		Busy               		: BOOL;
+		Error              		: BOOL;
+		ErrorID            		: DWORD;
+		TargetNodeIDs			: ARRAY[0..MAX_INDEX_NODELIST] OF UANodeID;
+		TargetErrorIDs			: ARRAY[0..MAX_INDEX_NODELIST] OF DWORD;
+	END_VAR
+	
 	VAR
 		i_busy             		: BOOL;
 	END_VAR
@@ -113,12 +229,12 @@ END_FUNCTION_BLOCK
 	END_VAR
 
 	VAR_OUTPUT
-		NodeHdls				: ARRAY[0..MAX_INDEX_NODELIST] OF DWORD;
 		Done			   		: BOOL;
 		Busy               		: BOOL;
 		Error              		: BOOL;
 		ErrorID					: DWORD;
 		NodeErrorIDs           	: ARRAY[0..MAX_INDEX_NODELIST] OF DWORD;
+		NodeHdls				: ARRAY[0..MAX_INDEX_NODELIST] OF DWORD;
 	END_VAR
 
 	VAR
@@ -189,6 +305,28 @@ END_FUNCTION_BLOCK
 	END_VAR
 END_FUNCTION_BLOCK
 
+{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_NodeGetInformation
+	VAR_INPUT
+		Execute	           		: BOOL;
+		ConnectionHdl      		: DWORD;
+		NodeID					: UANodeID;
+		Timeout            		: TIME;
+	END_VAR
+
+	VAR_OUTPUT
+		Done			   		: BOOL;
+		Busy               		: BOOL;
+		Error              		: BOOL;
+		ErrorID           		: DWORD;
+		NodeGetInfoErrorIDs     : ARRAY[0..22] OF DWORD;
+		NodeInfo				: UANodeInformation;
+	END_VAR
+
+	VAR
+		i_busy             		: BOOL;
+	END_VAR
+END_FUNCTION_BLOCK
+
 {REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_SubscriptionCreate
 	VAR_INPUT
 		Execute	           		: BOOL;
@@ -199,11 +337,11 @@ END_FUNCTION_BLOCK
 	END_VAR
 
 	VAR_OUTPUT
-		SubscriptionHdl			: DWORD;
 		Done			   		: BOOL;
 		Busy               		: BOOL;
 		Error              		: BOOL;
 		ErrorID            		: DWORD;
+		SubscriptionHdl			: DWORD;
 	END_VAR
 
 	VAR_IN_OUT
@@ -234,57 +372,47 @@ END_FUNCTION_BLOCK
 	END_VAR
 END_FUNCTION_BLOCK
 
-{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_SubscriptionOperate
+{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_SubscriptionModify
 	VAR_INPUT
-		Execute	           		: BOOL;
+		Execute					: BOOL;
 		SubscriptionHdl			: DWORD;
-		PublishingEnable  		: BOOL;
-		Priority  				: USINT;
-		Timeout            		: TIME;
+		PublishingEnable		: BOOL;
+		Priority				: BYTE;
+		Timeout					: TIME;
 	END_VAR
-
 	VAR_OUTPUT
-		Published				: BOOL;
 		Done			   		: BOOL;
 		Busy               		: BOOL;
 		Error              		: BOOL;
 		ErrorID            		: DWORD;
 	END_VAR
-
+	
 	VAR_IN_OUT
 		PublishingInterval		: TIME;
 	END_VAR
-
+	
 	VAR
 		i_busy             		: BOOL;
 	END_VAR
 END_FUNCTION_BLOCK
 
-{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_MonitoredItemAdd
+{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_SubscriptionProcessed
 	VAR_INPUT
-		Execute	           		: BOOL;
+		Execute					: BOOL;
 		SubscriptionHdl			: DWORD;
-		NodeHdl					: DWORD;
-		NodeAddInfo				: UANodeAdditionalInfo;
-		Timeout            		: TIME;
+		Timeout					: TIME;
 	END_VAR
-
+	
 	VAR_OUTPUT
-		MonitoredItemHdl		: DWORD;
 		Done			   		: BOOL;
 		Busy               		: BOOL;
 		Error              		: BOOL;
 		ErrorID            		: DWORD;
+		Published				: BOOL;
 	END_VAR
-
-	VAR_IN_OUT
-		Variable	   			: STRING[255];
-		MonitoringSettings		: UAMonitoringSettings;
-	END_VAR
-
+	
 	VAR
 		i_busy             		: BOOL;
-		i_tid					: UDINT;
 	END_VAR
 END_FUNCTION_BLOCK
 
@@ -294,6 +422,7 @@ END_FUNCTION_BLOCK
 		SubscriptionHdl			: DWORD;
 		NodeHdlCount			: UINT;
 		NodeHdls				: ARRAY[0..MAX_INDEX_MONITORLIST] OF DWORD;
+		SyncMode				: UAMonitoringSyncMode;
 		NodeAddInfos			: ARRAY[0..MAX_INDEX_MONITORLIST] OF UANodeAdditionalInfo;
 		Timeout            		: TIME;
 	END_VAR
@@ -308,36 +437,15 @@ END_FUNCTION_BLOCK
 	END_VAR
 
 	VAR_IN_OUT
-		Variables	   			: ARRAY[0..MAX_INDEX_MONITORLIST] OF STRING[255];
-		MonitoringSettings		: ARRAY[0..MAX_INDEX_MONITORLIST] OF UAMonitoringParameters;
+		Variables	   			: ARRAY[0..MAX_INDEX_MONITORLIST] OF UAMonitoredVariables;
+		MonitoringParameter		: ARRAY[0..MAX_INDEX_MONITORLIST] OF UAMonitoringParameter;
 		ValuesChanged			: ARRAY[0..MAX_INDEX_MONITORLIST] OF BOOL;
-		RemainingValueCount		: ARRAY[0..MAX_INDEX_MONITORLIST] OF UINT;
-		TimeStamps				: ARRAY[0..MAX_INDEX_MONITORLIST] OF DT;
-		NodeQualityIDs			: ARRAY[0..MAX_INDEX_MONITORLIST] OF DWORD;
+		MinLostValueCount		: ARRAY[0..MAX_INDEX_MONITORLIST] OF UINT;
 	END_VAR
 
 	VAR
 		i_busy             		: BOOL;
 		i_tid					: UDINT;
-	END_VAR
-END_FUNCTION_BLOCK
-
-{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_MonitoredItemRemove
-	VAR_INPUT
-		Execute	           		: BOOL;
-		MonitoredItemHdl		: DWORD;
-		Timeout            		: TIME;
-	END_VAR
-
-	VAR_OUTPUT
-		Done			   		: BOOL;
-		Busy               		: BOOL;
-		Error              		: BOOL;
-		ErrorID            		: DWORD;
-	END_VAR
-
-	VAR
-		i_busy             		: BOOL;
 	END_VAR
 END_FUNCTION_BLOCK
 
@@ -363,26 +471,27 @@ END_FUNCTION_BLOCK
 	END_VAR
 END_FUNCTION_BLOCK
 
-{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_MonitoredItemOperate
+{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_MonitoredItemModifyList
 	VAR_INPUT
-		Execute	           		: BOOL;
-		MonitoredItemHdl		: DWORD;
-		Timeout            		: TIME;
+		Execute					: BOOL;
+		SubscriptionHdl			: DWORD;
+		MonitoredItemHdlCount	: UINT;
+		MonitoredItemHdls		: ARRAY[0..MAX_INDEX_MONITORLIST] OF DWORD;
+		Timeout					: TIME;
 	END_VAR
-
+	
 	VAR_OUTPUT
-		ValueChanged			: BOOL;
-		TimeStamp				: DT;
 		Done			   		: BOOL;
 		Busy               		: BOOL;
 		Error              		: BOOL;
 		ErrorID            		: DWORD;
+		NodeErrorIDs			: ARRAY[0..MAX_INDEX_MONITORLIST] OF DWORD;
 	END_VAR
-
+	
 	VAR_IN_OUT
-		MonitoringSettings 		: UAMonitoringSettings;
+		MonitoringParameters	: ARRAY[0..MAX_INDEX_MONITORLIST] OF UAMonitoringParameter;
 	END_VAR
-
+	
 	VAR
 		i_busy             		: BOOL;
 	END_VAR
@@ -397,12 +506,12 @@ END_FUNCTION_BLOCK
 	END_VAR
 
 	VAR_OUTPUT
-		Published				: BOOL;
 		Done			   		: BOOL;
 		Busy               		: BOOL;
 		Error              		: BOOL;
 		ErrorID            		: DWORD;
 		NodeErrorIDs			: ARRAY[0..MAX_INDEX_MONITORLIST] OF DWORD;
+		Published				: BOOL;
 	END_VAR	
 
 	VAR
@@ -422,60 +531,65 @@ END_FUNCTION_BLOCK
 	END_VAR
 
 	VAR_OUTPUT
-		EventItemHdl			: DWORD;
 		Done			   		: BOOL;
 		Busy               		: BOOL;
 		Error              		: BOOL;
 		ErrorID            		: DWORD;
+		EventItemHdl			: DWORD;
 	END_VAR
 
 	VAR_IN_OUT
 		EventFields	   			: ARRAY[0..MAX_INDEX_EVENTFIELDSELECTION] OF STRING[MAX_LENGTH_VARIABLE];
-	END_VAR
-
-	VAR
-		i_busy             		: BOOL;
-		i_tid					: UDINT;
-	END_VAR
-END_FUNCTION_BLOCK
-
-{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_EventItemRemove
-	VAR_INPUT
-		Execute	           		: BOOL;
-		SubscriptionHdl			: DWORD;
-		EventItemHdl			: DWORD;
-		Timeout            		: TIME;
-	END_VAR
-
-	VAR_OUTPUT
-		Done			   		: BOOL;
-		Busy               		: BOOL;
-		Error              		: BOOL;
-		ErrorID            		: DWORD;
-	END_VAR
-
-	VAR
-		i_busy             		: BOOL;
-		i_tid					: UDINT;
-	END_VAR
-END_FUNCTION_BLOCK
-
-{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_EventItemOperate
-	VAR_INPUT
-		Execute	           		: BOOL;
-		SubscriptionHdl			: DWORD;
-		EventItemHdl			: DWORD;
-		Timeout            		: TIME;
-	END_VAR
-
-	VAR_OUTPUT
 		EventProcessed			: BOOL;
-		RemainingEventCount		: INT;
+		RemainingEventCount		: UINT;
 		FieldErrorIDs			: ARRAY[0..MAX_INDEX_EVENTFIELDSELECTION] OF DWORD;
+	END_VAR
+
+	VAR
+		i_busy             		: BOOL;
+		i_tid					: UDINT;
+	END_VAR
+END_FUNCTION_BLOCK
+
+{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_EventItemRemoveList
+	VAR_INPUT
+		Execute	           		: BOOL;
+		SubscriptionHdl			: DWORD;
+		EventItemHdlCount		: UINT;
+		EventItemHdls			: ARRAY[0..MAX_INDEX_EVENTITEMLIST] OF DWORD;
+		Timeout            		: TIME;
+	END_VAR
+
+	VAR_OUTPUT
+		Done			   		: BOOL;
+		Busy               		: BOOL;
+		Error              		: BOOL;
+		ErrorID           		: DWORD;
+		ErrorIDs            	: ARRAY[0..MAX_INDEX_EVENTITEMLIST] OF DWORD;
+	END_VAR
+
+	VAR
+		i_busy             		: BOOL;
+		i_tid					: UDINT;
+	END_VAR
+END_FUNCTION_BLOCK
+
+{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_EventItemOperateList
+	VAR_INPUT
+		Execute	           		: BOOL;
+		SubscriptionHdl			: DWORD;
+		EventItemHdlCount		: UINT;
+		EventItemHdls			: ARRAY[0..MAX_INDEX_EVENTITEMLIST] OF DWORD;
+		Timeout            		: TIME;
+	END_VAR
+
+	VAR_OUTPUT
 		Done			   		: BOOL;
 		Busy               		: BOOL;
 		Error              		: BOOL;
 		ErrorID            		: DWORD;
+		EventProcessed			: BOOL;
+		FieldErrorIDs			: ARRAY[0..MAX_INDEX_EVENTITEMLIST] OF DWORD;
 	END_VAR
 
 	VAR
@@ -502,7 +616,7 @@ END_FUNCTION_BLOCK
 	END_VAR
 	
 	VAR_IN_OUT
-		Variable	   			: STRING[255];
+		Variable	   			: STRING[MAX_LENGTH_VARIABLE];
 	END_VAR
 
 	VAR
@@ -531,7 +645,7 @@ END_FUNCTION_BLOCK
 	END_VAR
 	
 	VAR_IN_OUT
-		Variables	   			: ARRAY[0..MAX_INDEX_NODELIST] OF STRING[255];
+		Variables	   			: ARRAY[0..MAX_INDEX_NODELIST] OF STRING[MAX_LENGTH_VARIABLE];
 	END_VAR
 
 	VAR
@@ -540,7 +654,7 @@ END_FUNCTION_BLOCK
 	END_VAR
 END_FUNCTION_BLOCK
 
-{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UaClt_ReadBulk
+{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK BrUa_ReadBulk
 	VAR_INPUT
 		Execute	           		: BOOL;
 		ConnectionHdl      		: DWORD;
@@ -583,7 +697,7 @@ END_FUNCTION_BLOCK
 	END_VAR
 
 	VAR_IN_OUT
-		Variable	   			: STRING[255];
+		Variable	   			: STRING[MAX_LENGTH_VARIABLE];
 	END_VAR
 
 	VAR
@@ -611,7 +725,7 @@ END_FUNCTION_BLOCK
 	END_VAR
 
 	VAR_IN_OUT
-		Variables   			: ARRAY[0..MAX_INDEX_NODELIST] OF STRING[255];
+		Variables   			: ARRAY[0..MAX_INDEX_NODELIST] OF STRING[MAX_LENGTH_VARIABLE];
 	END_VAR
 
 	VAR
@@ -620,7 +734,7 @@ END_FUNCTION_BLOCK
 	END_VAR
 END_FUNCTION_BLOCK
 
-{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UaClt_WriteBulk
+{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK BrUa_WriteBulk
 	VAR_INPUT
 		Execute	           		: BOOL;
 		ConnectionHdl      		: DWORD;
@@ -667,6 +781,30 @@ END_FUNCTION_BLOCK
 	END_VAR
 END_FUNCTION_BLOCK
 
+{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_MethodGetHandleList
+	VAR_INPUT
+		Execute					: BOOL;
+		ConnectionHdl			: DWORD;
+		NodeIDCount				: UINT;
+		ObjectNodeIDs			: ARRAY[0..MAX_INDEX_METHOD] OF UANodeID;
+		MethodNodeIDs			: ARRAY[0..MAX_INDEX_METHOD] OF UANodeID;
+		Timeout					: TIME;
+	END_VAR
+	
+	VAR_OUTPUT
+		Done			   		: BOOL;
+		Busy               		: BOOL;
+		Error              		: BOOL;
+		ErrorID           		: DWORD;
+		ErrorIDs            	: ARRAY[0..MAX_INDEX_METHOD] OF DWORD;
+		MethodHdls				: ARRAY[0..MAX_INDEX_METHOD] OF DWORD;
+	END_VAR
+	
+	VAR
+		i_busy             		: BOOL;
+	END_VAR
+END_FUNCTION_BLOCK
+
 {REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_MethodReleaseHandle
 	VAR_INPUT
 		Execute	           		: BOOL;
@@ -682,6 +820,28 @@ END_FUNCTION_BLOCK
 		ErrorID            		: DWORD;
 	END_VAR
 
+	VAR
+		i_busy             		: BOOL;
+	END_VAR
+END_FUNCTION_BLOCK
+
+{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK UA_MethodReleaseHandleList
+	VAR_INPUT
+		Execute					: BOOL;
+		ConnectionHdl			: DWORD;
+		MethodHdlCount			: UINT;
+		MethodHdls				: ARRAY[0..MAX_INDEX_METHOD] OF DWORD;
+		Timeout					: TIME;
+	END_VAR
+	
+	VAR_OUTPUT
+		Done			   		: BOOL;
+		Busy               		: BOOL;
+		Error              		: BOOL;
+		ErrorID           		: DWORD;
+		ErrorIDs            	: ARRAY[0..MAX_INDEX_METHOD] OF DWORD;
+	END_VAR
+	
 	VAR
 		i_busy             		: BOOL;
 	END_VAR
@@ -703,8 +863,9 @@ END_FUNCTION_BLOCK
 	END_VAR
 
 	VAR_IN_OUT
-		InputArguments			: ARRAY[0..MAX_INDEX_ARGUMENTS] OF UAMethodArgument;
-		OutputArguments			: ARRAY[0..MAX_INDEX_ARGUMENTS] OF UAMethodArgument;
+		MethodResult			: DWORD;
+		InputArguments			: ARRAY[0..MAX_INDEX_ARGUMENTS] OF BrUaMethodArgument;
+		OutputArguments			: ARRAY[0..MAX_INDEX_ARGUMENTS] OF BrUaMethodArgument;
 	END_VAR
 
 	VAR
@@ -721,13 +882,13 @@ END_FUNCTION_BLOCK
 	END_VAR
 
 	VAR_OUTPUT
-		ConnectionStatus		: UAConnectionStatus;
-		ServerState				: UAServerState;
-		ServiceLevel			: BYTE;
 		Done			   		: BOOL;
 		Busy               		: BOOL;
 		Error              		: BOOL;
 		ErrorID            		: DWORD;
+		ConnectionStatus		: UAConnectionStatus;
+		ServerState				: UAServerState;
+		ServiceLevel			: BYTE;
 	END_VAR
 
 	VAR

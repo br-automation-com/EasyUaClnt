@@ -1,4 +1,10 @@
 VAR
 	EasyUaSubscription_0 : EasyUaSubscription;
 	VarA : INT;
+	SessionConnectInfo : UASessionConnectInfo;
+	Variable_0 : UAMonitoredVariables;
+	ValueChanged_0 : BOOL;
+	MinLostValueCount_0 : UINT;
+	TimeStamp_0 : DATE_AND_TIME;
+	NodeQualityID_0 : DWORD;
 END_VAR

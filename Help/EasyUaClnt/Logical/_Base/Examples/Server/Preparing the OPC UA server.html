@@ -1,44 +1,53 @@
 <!DOCTYPE html>
-<html>
-	<head>
-   <title>Preparing the OPC UA server</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Preparing the OPC UA server</title>
-		<meta name="ORDER" content="0">
-		<link rel="StyleSheet" href="styles.css">
-	</head>
-	<body>
-<h1>Preparing the OPC UA server</h1>
-    <p>Program examples are developed on ARsim, B&amp;R&apos;s simulation PLC. </p>
-    <h2>OPC UA configuration</h2>
-    <p>The OPC UA server is enabled in the PLC configuration.</p>
-	<p><img alt="" src="_img/arsimconfig.png" /></p>
-    <p>Parameter &quot;Activate OPC UA server&quot; is set to &quot;On&quot;, and the following parameters are modified:</p>
-    <ul>
-		<li>Network Settings / Port number = &quot;4841&quot;</li>
-        <li>Security policies / No security = &quot;Allow&quot; (the program examples work without encryption)</li>
-        <li>Information models / PV = &#39;2.00&#39;</li>
-    </ul>
-	<p><img alt="" src="_img/opcuaconfig.png" /></p>
-	
-		<h3>Adding library dependencies</h3>
-	
-	<p>
-        As long as AsOpcUas functions has been used in this task this library must be imported to the project from Toolbox -> BuR Libraries.
-    </p>
-	<p><img alt="" src="_img/asopcuaslibraryimport.png" /></p>
-	
-    <h3>Sample program on the server</h3>
-    <p>
-        Program example &quot;ServerTask&quot; runs on the PLC with a few variable that can then be used in the client programs. It can be saved using the following link. Then it has to be imported in server Automation Studio project.
-    </p>
-	
-	<p><a href="_zip/ServerTask.zip" target="_self"/>Server sample task</a></p>
-	
-    <h3>Configuring variables</h3>
-    <p>
-        The variables in sample program &quot;ServerTask&quot; must be configured in order for them to be set up as OPC UA nodes on the OPC UA server:
-    </p>	
-	<p><img alt="" src="_img/opcuamap.png" /></p>
-	</body>
+<html lang="en">
+<head>
+    <title>Preparing the OPC UA server</title>
+    <link rel="stylesheet" href="C:\Projects\AS\BR\easyuaclient-as-project-dev-local\Help\EasyUaClnt\Logical\EasyUaClnt\styles.css">
+    <base href="C:/Projects/AS/BR/easyuaclient-as-project-dev-local/Help/EasyUaClnt/Logical/_Base/" target="_blank">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="ORDER" content="0">
+</head>
+<body>
+    <h1>Preparing the OPC UA Server</h1>
+    <p>Program examples are developed on ARsim, B&R's simulation PLC.</p>
+
+    <h2>OPC UA Configuration</h2>
+    <p>The OPC UA server is enabled in the Configuration View, under the active configuration, in the following file: <strong>Connectivity > OpcUaCs > UaCsConfig.uacfg</strong>.</p>
+    <p><img src="_img/enableopcua1.png" alt="Enable OPC UA Server"></p>
+    <p>Parameter <strong>"OPC UA Client/Server"</strong> is set to <strong>"Enabled"</strong>.</p>
+    <p><img src="_img/enableopcua2.png" alt="OPC UA Client/Server Enabled"></p>
+    
+    <h2>Configuring Users and Roles</h2>
+    <p>For security reasons, the user <strong>Anonymous</strong> is disabled by default, so it is necessary to create at least one user and assign it a role. By default, no users or roles are created, so it is necessary to add a Role file and a User file to <strong>AccessAndSecurity > UserRoleSystem</strong>.</p>
+    <p><img src="_img/userrolesystem1.png" alt="User Role System"></p>
+    <p><img src="_img/userrolesystem2.png" alt="Add Role and User Files"></p>
+    <p>By default, a role called <strong>"Role"</strong> is added to the Role file. This role is renamed to <strong>"Administrators"</strong>.</p>
+    <p><img src="_img/userrolesystem3.png" alt="Rename Role to Administrators"></p>
+    <p>By default, a user called <strong>"User"</strong> is added to the User file. This user is renamed to <strong>"Admin"</strong> and the password <strong>"12345"</strong> is set in the field <strong>"Password"</strong>. The created role <strong>"Administrators"</strong> is assigned to this user.</p>
+    <p><img src="_img/userrolesystem4.png" alt="Rename User to Admin"></p>
+
+    <h2>Giving OPC UA Permissions to the Role</h2>
+    <p>The role <strong>"Administrators"</strong> needs permissions in OPC UA to perform different operations. The <strong>"Administrators"</strong> role must be added to the file <strong>Connectivity > OpcUaCs > UaDvConfig.uadcfg</strong> and then all permissions must be enabled for it.</p>
+    <p><img src="_img/configopcuarole1.png" alt="Configure OPC UA Role"></p>
+
+    <h2>Adding Library Dependencies</h2>
+    <p>As long as <strong>AsOpcUas</strong> functions are used in this task, this library must be imported to the project from <strong>Toolbox > B&R Libraries</strong>.</p>
+    <p><img src="_img/asopcuaslibraryimport.png" alt="Import AsOpcUas Library"></p>
+
+    <h2>Sample Program on the Server</h2>
+    <p>Program example <strong>"ServerTask"</strong> runs on the PLC with a few variables that can then be used in the client programs. It can be saved using the following link. Then it has to be imported into the server Automation Studio project.</p>
+    <p><a href="_zip/ServerTask.zip" target="_self">Server Sample Task</a></p>
+    <p><img src="_img/asimport.png" alt="Import Server Task"></p>
+    <p>The task must be assigned to a cyclic task class. In this case, it has been assigned to <strong>Cyclic #8</strong>.</p>
+    <p><img src="_img/servertaskassignment.png" alt="Assign Server Task"></p>
+
+    <h2>Configuring Variables</h2>
+    <p>The variables in the sample program <strong>"ServerTask"</strong> must be configured in order for them to be set up as OPC UA nodes on the OPC UA server. Firstly, it is necessary to add a <strong>DefaultView</strong> file to <strong>Connectivity > OpcUaCs</strong>.</p>
+    <p><img src="_img/opcuadefaultview1.png" alt="Add DefaultView File"></p>
+    <p><img src="_img/opcuadefaultview2.png" alt="DefaultView File"></p>
+    <p>Open the file <strong>OpcUaCsMap.uad</strong> and enable the tags: <strong>Multiply</strong>, <strong>VarX</strong>, <strong>VarY</strong>, and <strong>VarZ</strong>.</p>
+    <p><img src="_img/enableopcuatags.png" alt="Enable OPC UA Tags"></p>
+    <p><img src="_img/opcuamap.png" alt="OPC UA Map"></p>
+    <p>After this, the OPC UA server is configured. Then the project can be transferred to the controller.</p>
+</body>
 </html>

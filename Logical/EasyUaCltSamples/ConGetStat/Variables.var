@@ -1,3 +1,4 @@
 VAR
 	EasyUaConnectionGetStatus_0 : EasyUaConnectionGetStatus;
+	SessionConnectInfo : UASessionConnectInfo;
 END_VAR

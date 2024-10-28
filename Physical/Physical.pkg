@@ -2,14 +2,10 @@
 <?AutomationStudio FileVersion="4.9"?>
 <Physical xmlns="http://br-automation.co.at/AS/Physical">
   <Objects>
-    <Object Type="Configuration">APC2100_Server</Object>
-    <Object Type="Configuration">APC2100_Client</Object>
-    <Object Type="Configuration">Simulation_Server</Object>
-    <Object Type="Configuration">Simulation_Client</Object>
-    <Object Type="Configuration">IA32_Dynamic</Object>
-    <Object Type="Configuration">IA32_Static</Object>
-    <Object Type="Configuration">ARM_Dynamic</Object>
-    <Object Type="Configuration">ARM_Static</Object>
-    <Object Type="Configuration">C70_Server</Object>
+    <Object Type="Configuration">Simulation</Object>
+    <Object Type="Configuration" TransferedForTargetSourceCompare="true">Dynamic_IA32</Object>
+    <Object Type="Configuration" TransferedForTargetSourceCompare="true">Static_IA32</Object>
+    <Object Type="Configuration" TransferedForTargetSourceCompare="true">Dynamic_ARM</Object>
+    <Object Type="Configuration" TransferedForTargetSourceCompare="true">Static_ARM</Object>
   </Objects>
 </Physical>

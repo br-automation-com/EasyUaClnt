@@ -1,4 +1,5 @@
 VAR
 	EasyUaWrite_0 : EasyUaWrite;
 	VarA : INT;
+	SessionConnectInfo : UASessionConnectInfo;
 END_VAR

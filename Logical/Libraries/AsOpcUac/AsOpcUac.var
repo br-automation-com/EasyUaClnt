@@ -1,24 +1,50 @@
                                                                       
 VAR CONSTANT
+	MAX_LENGTH_STRING					: UINT := 255;
 	MAX_LENGTH_VARIABLE					: UINT := 255;
+	MAX_LENGTH_ARGUMENT					: UINT := 64;
 	MAX_LENGTH_BYTESTRING				: UINT := 1024;
+	MAX_LENGTH_LOCALEID					: UINT := 6;
 	
-	MAX_ELEMENTS_ARRAYDIMENSION 		: UINT := 7;	(* B&R supports arrays with 7 dimensions											*)
-	MAX_ELEMENTS_INDEXRANGE 			: UINT := 8;	(* Index range addresses max number of dimensions +1 for string/bytestring index	*)
-	MAX_ELEMENTS_NODELIST 				: UINT := 64;	(* Maximum number of items the node list functions can handle						*)
-	MAX_ELEMENTS_MONITORLIST			: UINT := 64;	(* Maximum number of elements the monitored item list functions can handle			*)
-	MAX_ELEMENTS_ARGUMENTS 				: UINT := 10;	(* Maximum number of input and output arguments for method call						*)
-	MAX_ELEMENTS_EVENTFIELDSELECTION	: UINT := 64;
+	MAX_ELEMENTS_ARRAYDIMENSION 		: UINT := 7;	(* B&R supports arrays with 7 dimensions *)
+	MAX_ELEMENTS_INDEXRANGE 			: UINT := 8;	(* Index range addresses max number of dimensions +1 for String/ByteString index *)
+	MAX_ELEMENTS_NODELIST 				: UINT := 64;	(* Maximum number of items the node list functions can handle *)
+	MAX_ELEMENTS_MONITORLIST			: UINT := 64;	(* Maximum number of elements the monitored item list functions can handle *)
+	MAX_ELEMENTS_ARGUMENTS 				: UINT := 10;	(* Maximum number of input and output arguments for method call	*)
 	MAX_ELEMENTS_RELATIVEPATH			: UINT := 16;
+	MAX_ELEMENTS_BROWSERESULT			: UINT := 64;	(* Maximum number of results in browse call *)
+	MAX_ELEMENTS_NAMESPACES				: UINT := 64;	(* Maximum number of namespaces to get index for *)
+	MAX_ELEMENTS_METHOD					: UINT := 64;	(* Maximum number of items the method list functions can handle *)
+	MAX_ELEMENTS_EVENTITEMLIST 			: UINT := 64;
+	MAX_EVENT_FIELD_SELECTIONS			: UINT := 64;
 	
-	(* B&R requires zero based arrays in .typ and .fun files, calculations like "const - 1" are not allowed
-	   for declarations in those files, so other constants denoting the array upper limit are declared *)
 	MAX_INDEX_ARRAYDIMENSION 			: UINT := MAX_ELEMENTS_ARRAYDIMENSION - 1;
 	MAX_INDEX_INDEXRANGE 				: UINT := MAX_ELEMENTS_INDEXRANGE - 1;
 	MAX_INDEX_NODELIST 					: UINT := MAX_ELEMENTS_NODELIST - 1;
 	MAX_INDEX_MONITORLIST 				: UINT := MAX_ELEMENTS_MONITORLIST - 1;
 	MAX_INDEX_ARGUMENTS 				: UINT := MAX_ELEMENTS_ARGUMENTS - 1;
-	MAX_INDEX_EVENTFIELDSELECTION		: UINT := MAX_ELEMENTS_EVENTFIELDSELECTION - 1;
 	MAX_INDEX_RELATIVEPATH				: UINT := MAX_ELEMENTS_RELATIVEPATH - 1;
 	MAX_INDEX_BYTESTRING				: UINT := MAX_LENGTH_BYTESTRING - 1;
+	MAX_INDEX_BROWSERESULT				: UINT := MAX_ELEMENTS_BROWSERESULT - 1;
+	MAX_INDEX_NAMESPACES				: UINT := MAX_ELEMENTS_NAMESPACES - 1;
+	MAX_INDEX_METHOD					: UINT := MAX_ELEMENTS_METHOD - 1;
+	MAX_INDEX_EVENTITEMLIST				: UINT := MAX_ELEMENTS_EVENTITEMLIST -1;
+	MAX_INDEX_EVENTFIELDSELECTION		: UINT := MAX_EVENT_FIELD_SELECTIONS - 1;
+
+	UA_Bad_FW_PermanentError			: UDINT := 16#A0000001;
+	UA_Bad_FW_TempError					: UDINT := 16#A0000002;
+	UA_Bad_ConnectionInvalidHdl			: UDINT := 16#A0000105;
+	UA_Bad_NsNotFound					: UDINT := 16#A0000200;
+	UA_Bad_ResultTooLong				: UDINT := 16#A0000300;
+	UA_Bad_NodeInvalidHdl				: UDINT := 16#A0000302;
+	UA_Bad_MethodInvalidHdl				: UDINT := 16#A0000303;
+	UA_Bad_AttributeIdUnknown			: UDINT := 16#A0000400;
+	UA_Bad_AttributeIdInvalid			: UDINT := 16#A0000401;
+	UA_Bad_SubscriptionInvalidHdl		: UDINT := 16#A0000500;
+	UA_Bad_MonitoredItemInvalidHdl		: UDINT := 16#A0000501;
+	UA_Bad_MonitoredItemSyncMismatch	: UDINT := 16#A0000502;
+	UA_Bad_SyncModeInvalid				: UDINT := 16#A0000503;
+	UA_Bad_VariableNameInvalid			: UDINT := 16#B0000004;
+	UA_Bad_ElementCount					: UDINT := 16#B000000C;
+	UA_Bad_MonitoringQueueSize			: UDINT := 16#B000000D;
 END_VAR

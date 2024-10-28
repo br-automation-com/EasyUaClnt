@@ -4,6 +4,7 @@ FUNCTION_BLOCK UaSrv_MethodOperate
 		Execute	           		: BOOL;
 		MethodName				: STRING[255];
 		Action					: UaMethodOperateAction;
+		MethodResult			: DWORD;
 	END_VAR
 
 	VAR_OUTPUT
@@ -23,8 +24,8 @@ FUNCTION_BLOCK UaSrv_MethodCreate
 	VAR_INPUT
 		Execute	           		: BOOL;
 		MethodName				: STRING[255];
-		InputArguments			: ARRAY[0..9] OF UAMethodArgument;
-		OutputArguments			: ARRAY[0..9] OF UAMethodArgument;
+		InputArguments			: ARRAY[0..9] OF BrUaMethodArgument;
+		OutputArguments			: ARRAY[0..9] OF BrUaMethodArgument;
 	END_VAR
 
 	VAR_OUTPUT

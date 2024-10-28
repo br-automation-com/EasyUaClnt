@@ -4,10 +4,10 @@
   <Objects>
     <Object Type="Program" Language="IEC">ServerTask</Object>
     <Object Type="Program" Language="IEC">Read</Object>
-    <Object Type="Program" Language="IEC">Write</Object>
     <Object Type="Program" Language="IEC">ReadList</Object>
-    <Object Type="Program" Language="IEC">WriteList</Object>
     <Object Type="Program" Language="IEC">ReadBulk</Object>
+    <Object Type="Program" Language="IEC">Write</Object>
+    <Object Type="Program" Language="IEC">WriteList</Object>
     <Object Type="Program" Language="IEC">WriteBulk</Object>
     <Object Type="Program" Language="IEC">Subs</Object>
     <Object Type="Program" Language="IEC">SubsList</Object>

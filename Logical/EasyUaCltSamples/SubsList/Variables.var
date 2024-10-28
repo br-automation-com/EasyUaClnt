@@ -3,9 +3,10 @@ VAR
 	VarB : INT;
 	VarA : INT;
 	EasyUaSubscriptionList_0 : EasyUaSubscriptionList;
-	NodeErrorIDs_0 : ARRAY[0..MAX_INDEX_NODELIST] OF DWORD;
-	TimeStamps_0 : ARRAY[0..MAX_INDEX_NODELIST] OF DATE_AND_TIME;
+	Variables_0 : ARRAY[0..MAX_INDEX_MONITORLIST] OF UAMonitoredVariables;
 	ValuesChange_0 : ARRAY[0..MAX_INDEX_MONITORLIST] OF BOOL;
-	RemainingValueCount_0 : ARRAY[0..MAX_INDEX_MONITORLIST] OF UINT;
+	MinLostValueCount_0 : ARRAY[0..MAX_INDEX_MONITORLIST] OF UINT;
+	TimeStamps_0 : ARRAY[0..MAX_INDEX_MONITORLIST] OF DATE_AND_TIME;
 	NodeQualityIDs_0 : ARRAY[0..MAX_INDEX_MONITORLIST] OF DWORD;
+	SessionConnectInfo : UASessionConnectInfo;
 END_VAR

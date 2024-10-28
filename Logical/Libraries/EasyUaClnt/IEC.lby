@@ -1,37 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?AutomationStudio FileVersion="4.9"?>
-<Library Version="1.02.2" SubType="IEC" xmlns="http://br-automation.co.at/AS/Library">
-  <Files>
-    <File Description="Exported data types">Types.typ</File>
-    <File Description="Exported constants">Constants.var</File>
-    <File Description="Exported functions and function blocks">EasyUaClnt.fun</File>
-    <File>EasyUaMonitorServerStatus._st</File>
-    <File>EasyUaMonitorServerStatusAction._st</File>
-    <File>EasyUaMonitorServerStatusDeclaration._fun</File>
-    <File>EasyUaConnectionGetStatus.st</File>
-    <File>EasyUaConnectionGetStatusAction.st</File>
-    <File>EasyUaRead.st</File>
-    <File>EasyUaReadAction.st</File>
-    <File>EasyUaReadBulk.st</File>
-    <File>EasyUaReadBulkAction.st</File>
-    <File>EasyUaReadList.st</File>
-    <File>EasyUaReadListAction.st</File>
-    <File>EasyUaWrite.st</File>
-    <File>EasyUaWriteAction.st</File>
-    <File>EasyUaWriteList.st</File>
-    <File>EasyUaWriteListAction.st</File>
-    <File>EasyUaWriteBulk.st</File>
-    <File>EasyUaWriteBulkAction.st</File>
-    <File>EasyUaSubscription.st</File>
-    <File>EasyUaSubscriptionAction.st</File>
-    <File>EasyUaSubscriptionList.st</File>
-    <File>EasyUaSubscriptionListAction.st</File>
-    <File>EasyUaMethodCall.st</File>
-    <File>EasyUaMethodCallAction.st</File>
-  </Files>
+<Library Version="2.0.0" SubType="IEC" xmlns="http://br-automation.co.at/AS/Library">
+  <Objects>
+    <Object Type="File" Description="Exported data types">Types.typ</Object>
+    <Object Type="File" Description="Exported constants">Constants.var</Object>
+    <Object Type="File" Description="Exported functions and function blocks">EasyUaClnt.fun</Object>
+    <Object Type="Package" TransferedForTargetSourceCompare="true">ConnectionGetStatus</Object>
+    <Object Type="Package" TransferedForTargetSourceCompare="true">Read</Object>
+    <Object Type="Package" TransferedForTargetSourceCompare="true">ReadList</Object>
+    <Object Type="Package" TransferedForTargetSourceCompare="true">ReadBulk</Object>
+    <Object Type="Package" TransferedForTargetSourceCompare="true">Write</Object>
+    <Object Type="Package" TransferedForTargetSourceCompare="true">WriteList</Object>
+    <Object Type="Package" TransferedForTargetSourceCompare="true">WriteBulk</Object>
+    <Object Type="Package" TransferedForTargetSourceCompare="true">Subscription</Object>
+    <Object Type="Package" TransferedForTargetSourceCompare="true">SubscriptionList</Object>
+    <Object Type="Package" TransferedForTargetSourceCompare="true">MethodCall</Object>
+  </Objects>
   <Dependencies>
-    <Dependency ObjectName="AsOpcUac" />
-    <Dependency ObjectName="standard" />
-    <Dependency ObjectName="AsBrStr" />
+    <Dependency ObjectName="AsOpcUac" FromVersion="6.0.0" />
+    <Dependency ObjectName="AsBrStr" FromVersion="6.0.0" />
   </Dependencies>
 </Library>

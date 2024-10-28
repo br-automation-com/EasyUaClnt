@@ -3,4 +3,5 @@ VAR
 	VarB : REAL;
 	VarA : REAL;
 	EasyUaMethodCall_0 : EasyUaMethodCall;
+	SessionConnectInfo : UASessionConnectInfo;
 END_VAR

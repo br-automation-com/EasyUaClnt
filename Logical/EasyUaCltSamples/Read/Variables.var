@@ -1,4 +1,5 @@
 VAR
 	EasyUaRead_0 : EasyUaRead;
 	VarA : INT;
+	SessionConnectInfo : UASessionConnectInfo;
 END_VAR

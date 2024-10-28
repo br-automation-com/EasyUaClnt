@@ -1,47 +1,35 @@
 <!DOCTYPE html>
-<html>
-	<head>
-   <title>Subscribing to an OPC UA node</title>
-	<title>Subscribing to an OPC UA node</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Subscribing to an OPC UA node</title>
-		<meta name="ORDER" content="0">
-		<link rel="StyleSheet" href="styles.css">
-	</head>
-	<body>
-<h1>Preparing the OPC UA client</h1>
-    <p>Program examples are developed on ARsim, B&amp;R&apos;s simulation PLC. </p>
-    <h2>OPC UA configuration</h2>
-    <p>The OPC UA system is enabled in the PLC configuration.</p>
-	<p><img alt="" src="_img/arsimconfig.png" /></p>
-    <p>Parameter &quot;Activate OPC UA system&quot; is set to &quot;On&quot;, and the following parameters are modified:</p>
-	<p><img alt="" src="_img/opcuasystem.png" /></p>
-	<h3>Adding EasyUaClt library</h3>
-	<p>In order to run the sample EasyUaClt has to be imported using Toolbox -> Existing Library</p>
-	<p><img alt="" src="_img/importeasyuacltlibrary.png" /></p>
-    <h3>Sample program on the client</h3>
-    <p>
-        Program example &quot;Subs&quot; runs on the PLC implementing the FUB EasyUaSubscription. It can be saved using the following link. Then it has to be imported in client Automation Studio project.
-    </p>
-	
-	<p><a href="_zip/Subs.zip" target="_self"/>Subs sample task</a></p>
-	
-    <h3>Subscribing to an OPC UA node</h3>
-    <p>
-        The OPC UA server node to subscribe is VarX and the value will be written in the local variable VarA. The code in the server side regarding VarX is:
-    </p>
-	
-	<pre class="SourceCode">
-		<font color="#0000FF" name="Courier" new="">PROGRAM<font color="#008080">&nbsp;</font>_CYCLIC
-		<font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;VarX</font><font color="#008080">&nbsp;</font><font color="#000000">:=</font><font color="#008080">&nbsp;</font><font color="#000000">VarX</font><font color="#008080">&nbsp;</font><font color="#000000">+1;
-		<font color="#0000FF" name="Courier" new="">END_PROGRAM</font>
-	</pre>
-	
-	<p>
-        Reading the node can be done enabling the FUB EasyUaSubscription_0 by setting EasyUaSubscription_0.Enable to TRUE. This can be done from the Watch window of the Subs task.
-    </p>
-	
-	<p><img alt="" src="_img/subsenabling.png" /></p>
-	
-	</body>
+<html lang="en">
+<head>
+    <title>Subscribing to an OPC UA node</title>
+    <link rel="stylesheet" href="C:\Projects\AS\BR\easyuaclient-as-project-dev-local\Help\EasyUaClnt\Logical\EasyUaClnt\styles.css">
+    <base href="C:/Projects/AS/BR/easyuaclient-as-project-dev-local/Help/EasyUaClnt/Logical/_Base/" target="_blank">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="ORDER" content="0">
+</head>
+<body>
+    <h1>Subscribing to an OPC UA Node Using EasyUaSubscription</h1>
+    <p>Program examples are developed on ARsim, B&R's simulation PLC.</p>
+
+    <h2>Preparing the OPC UA Client</h2>
+    <p>The OPC UA client is enabled in the Configuration View, under the active configuration, in the following file: <strong>Connectivity > OpcUaCs > UaCsConfig.uacfg</strong>.</p>
+    <p>Parameter <strong>"OPC UA Client/Server"</strong> is set to <strong>"Enabled"</strong>. The parameter TCP port number is set to <strong>4841</strong>.</p>
+    <p><img src="_img/enableopcuaclient1.png" alt="Enable OPC UA Client"></p>
+
+    <h2>Adding EasyUaClt Library</h2>
+    <p>In order to run the sample, EasyUaClt has to be imported using <strong>Toolbox > Existing Library</strong>.</p>
+    <p><img src="_img/importeasyuacltlibrary.png" alt="Import EasyUaClt Library"></p>
+
+    <h2>Sample Program on the Client</h2>
+    <p>Program example <strong>"Subs"</strong> runs on the PLC implementing the FUB EasyUaSubscription. It can be saved using the following link. Then it has to be imported into the client Automation Studio project.</p>
+    <p><a href="_zip/Subs.zip" target="_self">Subs Sample Task</a></p>
+
+    <h2>Subscribing to an OPC UA Node</h2>
+    <p>The OPC UA server node to subscribe is <strong>VarX</strong> and the value will be written in the local variable <strong>VarA</strong>. The code on the server side regarding VarX is:</p>
+<pre class="SourceCode"><font color="#0000FF" name="Courier" new="">PROGRAM _CYCLIC</font>
+	VarX := VarX + 1;
+<font color="#0000FF" name="Courier" new="">END_PROGRAM</font></pre>
+    <p>Reading the node can be done by enabling the FUB <strong>EasyUaSubscription_0</strong> by setting <strong>EasyUaSubscription_0.Enable</strong> to <strong>TRUE</strong>. This can be done from the Watch window of the Subs task.</p>
+    <p><img src="_img/subsenabling.png" alt="Enable Subscription"></p>
+</body>
 </html>

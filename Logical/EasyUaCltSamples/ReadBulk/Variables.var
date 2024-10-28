@@ -7,4 +7,5 @@ VAR
 	Variables_0 : ARRAY[0..2] OF STRING[255];
 	NodeErrorIDs_0 : ARRAY[0..2] OF DWORD;
 	TimeStamps_0 : ARRAY[0..2] OF DATE_AND_TIME;
+	SessionConnectInfo : UASessionConnectInfo;
 END_VAR
