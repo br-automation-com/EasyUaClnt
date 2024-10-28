@@ -65,7 +65,7 @@ ACTION EasyUaWriteBulk_CyclicCode:
 				IF (Internal.UA_Connect_0.Error = TRUE) THEN
 					Internal.StatusID := Internal.UA_Connect_0.ErrorID;
 					Internal.ConnectionHdl := 0;
-					Internal.Step := 253; 
+					Internal.Step := 254; 
 				END_IF;
 				Internal.UA_Connect_0(Execute := FALSE);
 			END_IF;
@@ -88,7 +88,7 @@ ACTION EasyUaWriteBulk_CyclicCode:
 				IF (Internal.UA_NamespaceGetIndexList_0.Error = TRUE) THEN
 					Internal.StatusID:= Internal.UA_NamespaceGetIndexList_0.ErrorID;
 					Internal.StatusIDs[0] := Internal.UA_NamespaceGetIndexList_0.ErrorIDs[0]; 
-					Internal.Step := 253; 
+					Internal.Step := 254; 
 				END_IF;
 				Internal.UA_NamespaceGetIndexList_0(Execute := FALSE);
 			END_IF;
